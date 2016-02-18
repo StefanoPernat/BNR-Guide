@@ -1,4 +1,10 @@
 <resources>
+    <!-- General App Strings -->
     <string name="app_name">GeoQuiz</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Quiz Activity -->
+    <string name="question_text">Costantinople is the largest city in Turkey</string>
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
 </resources>
