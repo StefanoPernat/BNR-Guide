@@ -22,6 +22,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mTrueButton;
     private Button mFalseButton;
     private Button mNextButton;
+    private Button mPrevButton;
     private TextView mQuestionTextView;
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_oceans,true),
@@ -42,7 +43,7 @@ public class QuizActivity extends AppCompatActivity {
 
         mQuestionTextView = (TextView) findViewById(R.id.question_text);
 
-        //Challenge One: Add listener to textview so the user can tap the textview and go to next question
+        //Challenge I: Add listener to textview so the user can tap the textview and go to next question
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +77,18 @@ public class QuizActivity extends AppCompatActivity {
                 Log.e(LOG_TAG,"Index: "+mCurrentIndex);
             }
         });
+
+        //Challenge II: Add a previous button
+        mPrevButton = (Button) findViewById(R.id.prev_button);
+        mPrevButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCurrentIndex = (mCurrentIndex - 1) % mQuestionBank.length;
+                updateQuestion();
+                Log.e(LOG_TAG, "Index: " + mCurrentIndex);
+            }
+        });
+
         updateQuestion();
     }
 
