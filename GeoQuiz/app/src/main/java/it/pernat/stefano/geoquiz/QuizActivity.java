@@ -19,6 +19,7 @@ import it.pernat.stefano.geoquiz.util.Question;
 public class QuizActivity extends AppCompatActivity {
 
     private final String LOG_TAG = QuizActivity.class.getSimpleName();
+    private final String QUESTIONS_INDEX = "questions.index";
 
     private Button mTrueButton;
     private Button mFalseButton;
@@ -95,6 +96,10 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        if(savedInstanceState != null){
+            mCurrentIndex = savedInstanceState.getInt(QUESTIONS_INDEX,0);
+        }
+
         updateQuestion();
     }
 
@@ -148,6 +153,12 @@ public class QuizActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         Log.d(LOG_TAG, "onDestroy() called");
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putInt(QUESTIONS_INDEX,mCurrentIndex);
     }
 
     private void updateQuestion(){
