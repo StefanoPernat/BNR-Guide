@@ -1,5 +1,6 @@
 package it.pernat.stefano.geoquiz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -27,6 +28,9 @@ public class QuizActivity extends AppCompatActivity {
     //Challenge III: Switch from Button to ImageButton
     private ImageButton mNextButton;
     private ImageButton mPrevButton;
+
+    private Button mCheatButton;
+
     private TextView mQuestionTextView;
     private Question[] mQuestionBank = new Question[]{
             new Question(R.string.question_oceans,true),
@@ -93,6 +97,16 @@ public class QuizActivity extends AppCompatActivity {
                 }
                 updateQuestion();
                 Log.e(LOG_TAG, "Index: " + mCurrentIndex);
+            }
+        });
+
+        mCheatButton = (Button) findViewById(R.id.cheat_button);
+        mCheatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean answerIsTrue = mQuestionBank[mCurrentIndex].isAnswerTrue();
+                Intent cheatIntent = CheatActivity.newIntent(QuizActivity.this, answerIsTrue);
+                startActivity(cheatIntent);
             }
         });
 
