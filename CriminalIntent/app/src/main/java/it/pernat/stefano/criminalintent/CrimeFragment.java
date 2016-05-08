@@ -13,6 +13,9 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+
 import it.pernat.stefano.criminalintent.logic.Crime;
 
 /**
@@ -23,6 +26,8 @@ public class CrimeFragment extends Fragment {
     private EditText mTitleField;
     private Button mDateButton;
     private CheckBox mSolvedCheckBox;
+
+    private static String CRIME_DATE_FORMAT = "EEEE, MMM d, yyyy";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,7 +61,9 @@ public class CrimeFragment extends Fragment {
         });
 
         this.mDateButton = (Button) view.findViewById(R.id.crime_date);
-        this.mDateButton.setText(this.mCrime.getDate().toString());
+        SimpleDateFormat sdf = new SimpleDateFormat(CRIME_DATE_FORMAT, Locale.US);
+
+        this.mDateButton.setText(sdf.format(this.mCrime.getDate()));
         this.mDateButton.setEnabled(false);
 
         this.mSolvedCheckBox = (CheckBox) view.findViewById(R.id.crime_solved);
